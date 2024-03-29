@@ -277,6 +277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunVFX: {fileID: 286717128}
+  fireRate: 10
+  accuracy: 1
+  recoil: 1
+  maximumAcurracyAngle: 30
 --- !u!4 &314430645
 Transform:
   m_ObjectHideFlags: 0
