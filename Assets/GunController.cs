@@ -1,77 +1,118 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class GunController : MonoBehaviour
 {
     [SerializeField] private VisualEffect GunVFX;
+    [SerializeField] private LayerMask raycastHitLayers;
+    private Player playerController;
 
     [SerializeField] private float fireRate;
 
     [SerializeField, Range(0f, 1f)] private float accuracy;
     [SerializeField, Range(0f, 1f)] private float recoil;
-    [SerializeField, Range(0f, 90f)] private float maximumAcurracyAngle;
+    [SerializeField, Range(0f, 90f)] private float maximumAccuracyAngle;
+    
+    private Vector3 mousePosition;
+    private Vector3 shootingPosition;
     
     private float recoilBuildUp;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private bool isShooting;
+    private Camera mainCamera;
+
+    private void Start()
     {
+        mainCamera = Camera.main;
         
+        playerController = GetComponent<Player>();
+
+        playerController.playerControls.Player.Fire.performed += FireOnPerformed;
+        playerController.playerControls.Player.Fire.canceled += FireOnCanceled;
     }
 
+    private void OnDisable()
+    {
+        playerController.playerControls.Player.Fire.performed -= FireOnPerformed;
+        playerController.playerControls.Player.Fire.canceled -= FireOnCanceled;
+    }
+
+    private void FireOnPerformed(InputAction.CallbackContext _)
+    {
+        Shoot();
+    }
+
+    private void FireOnCanceled(InputAction.CallbackContext _)
+    {
+        StopShooting();
+    }
+
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        float alpha = (accuracy + recoilBuildUp) / 2f * maximumAcurracyAngle;
-        float x = Vector2.Distance(mousePosition, transform.position) * Mathf.Sin(Mathf.Deg2Rad * (alpha / 2f));
-
-        Gizmos.DrawWireSphere(mousePosition, x/2);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
+        if(playerController == null)
         {
-            if(GunVFX.aliveParticleCount <= 0)
-            {
-                GunVFX.Play();
-            }
-            
-            GunVFX.SetFloat("FireRate", fireRate);
+            return;
         }
         
-        if(Input.GetMouseButton(0))
-        {
-            Vector3 mousePosition = Input.mousePosition;
+        float alpha = (accuracy + recoilBuildUp) / 2f * maximumAccuracyAngle;
+        Vector3 position = playerController.transform.position;
+        float x = Vector3.Distance(mousePosition, position) * Mathf.Sin(Mathf.Deg2Rad * (alpha / 2f));
 
+        Gizmos.DrawWireSphere(mousePosition, x/2);
+        
+        Gizmos.DrawLine(position, mousePosition);
+        Gizmos.DrawLine(position, shootingPosition);
+    }
+    #endif
+    
+    private void Shoot()
+    {
+        if(GunVFX.aliveParticleCount <= 0)
+        {
+            GunVFX.Play();
+        }
+        
+        GunVFX.SetFloat("FireRate", fireRate);
+
+        isShooting = true;
+    }
+    
+    private void StopShooting()
+    {
+        if(GunVFX.aliveParticleCount <= 0)
+        {
+            GunVFX.Stop();
+        }
+        
+        GunVFX.SetFloat("FireRate", 0f);
+
+        isShooting = false;
+    }
+    
+    private void Update()
+    {
+        Physics.Raycast(mainCamera.ScreenToWorldPoint(playerController.playerControls.Player.MousePosition.ReadValue<Vector2>()), mainCamera.transform.forward, out RaycastHit cameraRay, 100f, raycastHitLayers);
+
+        mousePosition = cameraRay.point;
+        
+        if(isShooting)
+        {
             if(recoilBuildUp < recoil)
             {
                 recoilBuildUp += Time.deltaTime;
             }
+            Vector3 position = playerController.transform.position;
+            
+            shootingPosition = CalculateRecoil(position);
 
-            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            
-            //Recoil
-            float alpha = (accuracy + recoilBuildUp) / 2f * maximumAcurracyAngle;
-            float x = Vector2.Distance(mousePosition, transform.position) * Mathf.Sin(Mathf.Deg2Rad * (alpha / 2f));
-            float r = x * Mathf.Sqrt(Random.Range(0f, 1f));
-            float theta = Random.Range(0f, 1f) * 2 * Mathf.PI;
-            float recoilY = mousePosition.y + r * Mathf.Sin(theta);
-            float recoilX = mousePosition.x + r * Mathf.Cos(theta);
-            
-            mousePosition += new Vector3(recoilX, recoilY, 0f);
+            Vector3 shootDirection = shootingPosition - position;
 
-            Vector2 mouseDirection = mousePosition - transform.position;
+            shootDirection.y = 0f;
             
-            GunVFX.SetVector3("Direction", mouseDirection);
+            GunVFX.SetVector3("Direction", shootDirection);
         }
         else
         {
@@ -89,11 +130,16 @@ public class GunController : MonoBehaviour
                 recoilBuildUp = 0f;
             }
         }
+    }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            GunVFX.SetFloat("FireRate", 0f);
-        }
-        
+    private Vector3 CalculateRecoil(Vector3 position)
+    {
+        float alpha = (accuracy + recoilBuildUp) / 2f * maximumAccuracyAngle;
+        float x = Vector3.Distance(mousePosition, position) * Mathf.Sin(Mathf.Deg2Rad * (alpha / 2f));
+        float r = x * Mathf.Sqrt(Random.Range(0f, 1f));
+        float theta = Random.Range(0f, 1f) * 2 * Mathf.PI;
+        float recoilZ = mousePosition.z + r * Mathf.Sin(theta);
+        float recoilX = mousePosition.x + r * Mathf.Cos(theta);
+        return new Vector3(recoilX, 0F, recoilZ);
     }
 }
