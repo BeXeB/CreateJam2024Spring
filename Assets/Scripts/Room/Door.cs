@@ -34,6 +34,7 @@ public class Door : MonoBehaviour
         col.enabled = false;
 
         thisRoom.gameObject.SetActive(false);
+        gameManager.currentRoom = nextRoom;
         nextRoom.gameObject.SetActive(true);
     }
 }

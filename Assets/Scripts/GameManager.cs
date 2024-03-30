@@ -24,10 +24,13 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     [SerializeField] private List<RoomsPerType> roomsPerType;
     
+    public Room currentRoom;
+    
     public Room GetRandomRoomOfType(RoomType roomType)
     {
         var rooms = roomsPerType.First(r => r.roomType == roomType).rooms;
-        return rooms[UnityEngine.Random.Range(0, rooms.Count)];
+        var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
+        return availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
     }
 }
 

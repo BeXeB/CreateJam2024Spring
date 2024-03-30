@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5551670683021525693}
+  - component: {fileID: 3324960035378099250}
   m_Layer: 0
   m_Name: ParkingLotEdge
   m_TagString: Untagged
@@ -32,6 +33,27 @@ Transform:
   - {fileID: 7326904015511045088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3324960035378099250
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131802713972526898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.031372, y: 0.72428393, z: 0.6606368}
+  m_Center: {x: -1.9972415, y: 0.05013013, z: 1.2464972}
 --- !u!1001 &7072020429712794635
 PrefabInstance:
   m_ObjectHideFlags: 0
