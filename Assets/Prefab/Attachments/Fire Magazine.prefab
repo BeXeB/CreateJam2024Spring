@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7894373004531890476}
   - component: {fileID: 7692322203303563233}
   m_Layer: 0
-  m_Name: No Magazine
+  m_Name: Fire Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachmentImage: {fileID: 21300000, guid: 9f3e8a7a640b640feac66da51cc078c5, type: 3}
   attachmentType: 2
-  magazineType: 0
-  magazineColor: {r: 1, g: 0.7019608, b: 0.7019608, a: 1}
+  magazineType: 3
+  magazineColor: {r: 1, g: 0.47777843, b: 0, a: 1}
   barrelType: 0
   catalystType: 0
   damageModifier: 0

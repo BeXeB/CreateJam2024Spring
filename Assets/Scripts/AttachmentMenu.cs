@@ -39,18 +39,48 @@ public class AttachmentMenu : MonoBehaviour
                 break;
             case AttachmentType.Barrel:
                 List<Barrel> barrels = gunController.attachmentsInInventory.FindAll(attachment => attachment.attachmentType == AttachmentType.Barrel).ConvertAll(attachment => (Barrel)attachment);
+                
+                foreach(Barrel barrel in barrels)
+                {
+                    GameObject attachmentButton = Instantiate(attachmentButtonPrefab, attachmentMenu.transform);
+                    attachmentButton.GetComponent<AttachmentUIElement>().Initialize(barrel);
+                }
                 break;
             case AttachmentType.Magazine:
                 List<Magazine> magazines = gunController.attachmentsInInventory.FindAll(attachment => attachment.attachmentType == AttachmentType.Magazine).ConvertAll(attachment => (Magazine)attachment);
+                
+                foreach(Magazine magazine in magazines)
+                {
+                    GameObject attachmentButton = Instantiate(attachmentButtonPrefab, attachmentMenu.transform);
+                    attachmentButton.GetComponent<AttachmentUIElement>().Initialize(magazine);
+                }
                 break;
             case AttachmentType.Stock:
                 List<Stock> stocks = gunController.attachmentsInInventory.FindAll(attachment => attachment.attachmentType == AttachmentType.Stock).ConvertAll(attachment => (Stock)attachment);
+                
+                foreach(Stock stock in stocks)
+                {
+                    GameObject attachmentButton = Instantiate(attachmentButtonPrefab, attachmentMenu.transform);
+                    attachmentButton.GetComponent<AttachmentUIElement>().Initialize(stock);
+                }
                 break;
             case AttachmentType.Receiver:
                 List<Receiver> receivers = gunController.attachmentsInInventory.FindAll(attachment => attachment.attachmentType == AttachmentType.Receiver).ConvertAll(attachment => (Receiver)attachment);
+                
+                foreach(Receiver receiver in receivers)
+                {
+                    GameObject attachmentButton = Instantiate(attachmentButtonPrefab, attachmentMenu.transform);
+                    attachmentButton.GetComponent<AttachmentUIElement>().Initialize(receiver);
+                }
                 break;
             case AttachmentType.Catalyst:
                 List<Catalyst> catalysts = gunController.attachmentsInInventory.FindAll(attachment => attachment.attachmentType == AttachmentType.Catalyst).ConvertAll(attachment => (Catalyst)attachment);
+                
+                foreach(Catalyst catalyst in catalysts)
+                {
+                    GameObject attachmentButton = Instantiate(attachmentButtonPrefab, attachmentMenu.transform);
+                    attachmentButton.GetComponent<AttachmentUIElement>().Initialize(catalyst);
+                }
                 break;
         }
     }

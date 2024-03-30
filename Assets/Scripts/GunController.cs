@@ -25,7 +25,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private LayerMask raycastHitLayers;
     private Player playerController;
     
-    internal Color vfxColor;
+    [SerializeField] internal Color vfxColor;
     internal MagazineType magazineType;
     [SerializeField] internal float bulletSpeed;
     [SerializeField] internal float fireRate;
@@ -113,6 +113,8 @@ public class GunController : MonoBehaviour
             Bullet bulletInstance = bulletPool.Get();
             
             bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+            
+            bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
             
             bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
             
