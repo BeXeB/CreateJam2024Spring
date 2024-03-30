@@ -63,7 +63,6 @@ public class Conversation : MonoBehaviour
 
     public void ContinueDialogue(InputAction.CallbackContext context)
     {
-        Debug.Log("CONTINUE PRESSED");
         PerformDialogue();
     }
 

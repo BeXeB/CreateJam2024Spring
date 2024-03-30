@@ -89,7 +89,6 @@ public class Player : MonoBehaviour
     {
         if (nearbyInteractable)
         {
-            Debug.Log("trying to interact");
             nearbyInteractable.Interact();
         }
     }
@@ -106,10 +105,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collided with trigger");
         if (other.gameObject.GetComponent<Interactable>() != null)
         {
-            Debug.Log("collided with Ïnteractable");
             nearbyInteractable = other.gameObject.GetComponent<Interactable>();
             //interactCanvas.gameObject.SetActive(true); TODO this if neccessary
         }
@@ -117,10 +114,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Left trigger");
         if (other.gameObject.GetComponent<Interactable>() == nearbyInteractable)
         {
-            Debug.Log("left Ïnteractable");
             //interactCanvas.gameObject.SetActive(false); TODO this if neccessary
             nearbyInteractable = null;
         }
