@@ -7,13 +7,14 @@ using Random = UnityEngine.Random;
 
 public class GunController : MonoBehaviour
 {
-    private ObjectPool<Rigidbody> bulletPool;
+    internal ObjectPool<Bullet> bulletPool;
     
     [SerializeField] private GameObject bullet;
     [SerializeField] private VisualEffect GunVFX;
     [SerializeField] private LayerMask raycastHitLayers;
     private Player playerController;
-
+    
+    [SerializeField] private float bulletSpeed;
     [SerializeField] private float fireRate;
     private float nextFire;
 
@@ -39,21 +40,23 @@ public class GunController : MonoBehaviour
         playerController.playerControls.Player.Fire.canceled += FireOnCanceled;
         
         //Bullet pooling
-        bulletPool = new ObjectPool<Rigidbody>(() => Instantiate(bullet).GetComponent<Rigidbody>(), GetBullet, ReleaseBullet, DestroyBullet, false, 50    , 1000);
+        bulletPool = new ObjectPool<Bullet>(() => Instantiate(bullet).GetComponent<Bullet>(), GetBullet, ReleaseBullet, DestroyBullet, true, 50    , 1000);
     }
 
-    private void GetBullet(Rigidbody obj)
+    private void GetBullet(Bullet obj)
     {
         obj.gameObject.SetActive(true);
-        obj.position = transform.position;
+        
+        obj.rb.position = playerController.transform.position;
     }
     
-    private void ReleaseBullet(Rigidbody obj)
+    private void ReleaseBullet(Bullet obj)
     {
+        obj.rb.velocity = Vector3.zero;
         obj.gameObject.SetActive(false);
     }
     
-    private void DestroyBullet(Rigidbody obj)
+    private void DestroyBullet(Bullet obj)
     {
         Destroy(obj.gameObject);
     }
@@ -128,11 +131,11 @@ public class GunController : MonoBehaviour
 
             shootDirection.y = 0f;
             
-            Rigidbody bulletInstance = bulletPool.Get();
-
-            StartCoroutine(ReleaseBulletAfterTime(bulletInstance));
+            Bullet bulletInstance = bulletPool.Get();
             
-            bulletInstance.velocity = shootDirection.normalized * 50f;
+            bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+            
+            bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
             
             nextFire = 0f;
         }
@@ -158,11 +161,5 @@ public class GunController : MonoBehaviour
         float recoilZ = mousePosition.z + r * Mathf.Sin(theta);
         float recoilX = mousePosition.x + r * Mathf.Cos(theta);
         return new Vector3(recoilX, 0F, recoilZ);
-    }
-    
-    private IEnumerator ReleaseBulletAfterTime(Rigidbody bulletInstance)
-    {
-        yield return new WaitForSeconds(5f);
-        bulletPool.Release(bulletInstance);
     }
 }
