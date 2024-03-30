@@ -7,7 +7,14 @@
             gunController = FindAnyObjectByType<GunController>();
         }
         
-        throw new System.NotImplementedException();
+        gunController.EquipAttachment(this);
+        gunController.bulletSpeed = bulletSpeed;
+        gunController.bulletRange = bulletRange;
+        gunController.bulletSizeMultiplier = bulletSizeMultiplier;
+        if(barrelType == BarrelTypes.Shotgun)
+        {
+            gunController.EquipShotgun();
+        }
     }
 
     public override void DeAttach()
@@ -17,6 +24,11 @@
             gunController = FindAnyObjectByType<GunController>();
         }
         
-        throw new System.NotImplementedException();
+        gunController.DeEquipAttachment(this);
+
+        if(barrelType == BarrelTypes.Shotgun)
+        {
+            gunController.RemoveShotgun();
+        }
     }
 }

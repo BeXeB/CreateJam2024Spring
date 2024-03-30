@@ -13,8 +13,9 @@ public abstract class Attachment : MonoBehaviour
     public Color magazineColor;
     [Header("Barrel")]
     public BarrelTypes barrelType;
-    [SerializeField] protected float rangeModifier;
-    [SerializeField] protected float bulletSpeedModifier;
+    [SerializeField] protected float bulletRange;
+    [SerializeField] protected float bulletSpeed;
+    [SerializeField] protected float bulletSizeMultiplier = 1f;
     [Header("Catalyst")]
     public CatalystTypes catalystType;
     [SerializeField] protected float damageModifier;
