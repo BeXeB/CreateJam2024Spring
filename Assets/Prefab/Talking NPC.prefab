@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: Evil Boss Guy
-  entityVoicePool: []
+  entityVoicePool:
+  - {fileID: 8300000, guid: 2ed7b1a595df32f43bc8481989bbb30a, type: 3}
+  - {fileID: 8300000, guid: 77e4c51ac20399644ad0a72ecc792ae8, type: 3}
+  - {fileID: 8300000, guid: 251f666b17d57524aaf4b2eb63759144, type: 3}
   dialouge:
   - playerMessage: 1
     message: Hello i am the player
