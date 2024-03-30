@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,8 +15,7 @@ public class Room : MonoBehaviour
 
     private GameManager gameManager;
     
-    public float2 center;
-    public float2 size;
+    public List<SpawnArea> spawnAreas;
     
     public List<EnemyAmount> enemyAmounts;
     
@@ -39,8 +39,11 @@ public class Room : MonoBehaviour
     
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(center.x - size.x / 2, center.x + size.x / 2),
-            Random.Range(center.y - size.y / 2, center.y + size.y / 2), 0);
+        var spawnArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+        var position = spawnArea.center.position;
+        var randomPosition = new Vector3(Random.Range(position.x - spawnArea.size.x / 2, position.x + spawnArea.size.x / 2),
+            1f, Random.Range(position.z - spawnArea.size.y / 2, position.z + spawnArea.size.y / 2));
+        return randomPosition;
     }
     
     private void OnCleared(IClearable clearable)
@@ -54,11 +57,18 @@ public class Room : MonoBehaviour
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct EnemyAmount
 {
     public GameObject enemyPrefab;
     public int amount;
+}
+
+[Serializable]
+public struct SpawnArea
+{
+    public Transform center;
+    public float2 size;
 }
 
 public enum RoomType
