@@ -1,8 +1,5 @@
-﻿namespace Enemies
+﻿public delegate void OnCleared(IClearable clearable);
+public interface IClearable
 {
-    public delegate void OnCleared(IClearable clearable);
-    public interface IClearable
-    {
-        public event OnCleared OnCleared;
-    }
+    public event OnCleared OnCleared;
 }
