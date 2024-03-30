@@ -27,12 +27,14 @@ public class GunController : MonoBehaviour
     
     [SerializeField] internal Color vfxColor;
     internal MagazineType magazineType;
-    [SerializeField] internal float bulletSpeed;
-    [SerializeField] internal float fireRate;
+    [SerializeField] internal float bulletSpeed = 5f;
+    [SerializeField] internal float fireRate = 5f;
     [SerializeField] internal float damage;
-    [SerializeField, Range(0f, 1f)] internal float accuracy;
-    [SerializeField, Range(0f, 1f)] internal float recoil;
-    [SerializeField, Range(0f, 90f)] internal float maximumAccuracyAngle;
+    [SerializeField, Range(0f, 1f)] internal float accuracy = 1f;
+    [SerializeField, Range(0f, 1f)] internal float recoil = 1f;
+    [SerializeField, Range(0f, 90f)] internal float maximumAccuracyAngle = 45f;
+    [SerializeField] internal float bulletRange;
+    [SerializeField] internal float bulletSizeMultiplier = 1f;
     
     private float nextFire;
     private float recoilBuildUp;
@@ -41,6 +43,8 @@ public class GunController : MonoBehaviour
     private Vector3 shootingPosition;
     
     private bool isShooting;
+    private bool isShotgun;
+
 
     #region MonoBehaviour Methods
     private void Start()
@@ -56,7 +60,7 @@ public class GunController : MonoBehaviour
         bulletPool = new ObjectPool<Bullet>(() => Instantiate(bullet).GetComponent<Bullet>(), GetBullet, ReleaseBullet, DestroyBullet, true, 50    , 1000);
         
         equippedScope = attachmentsInInventory.Find(defaultScope => defaultScope.name == "No Scope") as Scope;
-        equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "No Barrel") as Barrel;
+        equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "Pistol Barrel") as Barrel;
         equippedMagazine = attachmentsInInventory.Find(defaultMagazine => defaultMagazine.name == "No Magazine") as Magazine;
         equippedStock = attachmentsInInventory.Find(defaultStock => defaultStock.name == "No Stock") as Stock;
         equippedReceiver = attachmentsInInventory.Find(defaultReceiver => defaultReceiver.name == "No Receiver") as Receiver;
@@ -109,14 +113,47 @@ public class GunController : MonoBehaviour
             Vector3 shootDirection = shootingPosition - position;
 
             shootDirection.y = 0f;
+
+            if(!isShotgun)
+            {
+                Bullet bulletInstance = bulletPool.Get();
             
-            Bullet bulletInstance = bulletPool.Get();
+                bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
             
-            bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+                bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
+
+                bulletInstance.timeToLiveModifier = bulletRange;
             
-            bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
+                bulletInstance.Instantiate();
             
-            bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+                bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
+            
+                bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+            }
+            else
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    Bullet bulletInstance = bulletPool.Get();
+            
+                    bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+            
+                    bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
+
+                    bulletInstance.timeToLiveModifier = bulletRange;
+            
+                    bulletInstance.Instantiate();
+            
+                    bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
+            
+                    shootDirection = shootingPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) - position;
+                    
+                    shootDirection.y = 0f;
+                    
+                    bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+                }
+            }
+            
             
             nextFire = 0f;
         }
@@ -234,7 +271,7 @@ public class GunController : MonoBehaviour
                 }
                 break;
             case AttachmentType.Barrel:
-                if(equippedBarrel == attachment && equippedBarrel.name != "No Barrel")
+                if(equippedBarrel == attachment && equippedBarrel.name != "Pistol Barrel")
                 {
                     equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "No Barrel") as Barrel;
                     attachment.DeAttach();
@@ -290,5 +327,19 @@ public class GunController : MonoBehaviour
         float recoilZ = mousePosition.z + r * Mathf.Sin(theta);
         float recoilX = mousePosition.x + r * Mathf.Cos(theta);
         return new Vector3(recoilX, 0F, recoilZ);
+    }
+
+    public void EquipShotgun()
+    {
+        isShotgun = true;
+        damage *= 0.2f;
+        fireRate *= 0.25f;
+    }
+
+    public void RemoveShotgun()
+    {
+        isShotgun = false;
+        damage *= 5f;
+        fireRate *= 4f;
     }
 }

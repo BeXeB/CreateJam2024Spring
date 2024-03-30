@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] internal VisualEffect bulletVFX;
     internal Rigidbody rb;
     private Coroutine returnToPoolCoroutine;
+    internal float timeToLiveModifier = 1f;
 
     private void OnDisable()
     {
@@ -18,7 +19,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void Instantiate()
     {
         returnToPoolCoroutine = StartCoroutine(ReleaseBulletAfterTime());
     }
@@ -38,7 +39,7 @@ public class Bullet : MonoBehaviour
     
     private IEnumerator ReleaseBulletAfterTime()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f * timeToLiveModifier);
         gunController.bulletPool.Release(this);
     }
 }
