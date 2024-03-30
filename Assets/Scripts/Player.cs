@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public string playerName = "Player"; // TODO choose a character name or let player type one
+    public List<AudioClip> voicePool; // Pool used for playing sound when player speaks in dialogue
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float startingHealth = 100f;
     private float health;
@@ -15,7 +17,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float movementSpeed = 5f;
     private Vector2 moveDirection;
+    private bool isLocked = false;
+
     [SerializeField] private GameObject playerCamera;
+
+    private Interactable nearbyInteractable;
 
     private void Awake()
     {
@@ -26,10 +32,12 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        playerControls.Player.Interact.performed += Interact;
     }
 
     private void OnDisable()
     {
+        playerControls.Player.Interact.performed -= Interact;
         playerControls.Disable();
     }
 
@@ -60,7 +68,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        moveDirection = playerControls.Player.Move.ReadValue<Vector2>();
+        if(isLocked)
+        {
+            moveDirection = Vector2.zero;
+        }
+        else
+        {
+            moveDirection = playerControls.Player.Move.ReadValue<Vector2>();
+        }
     }
 
     private void FixedUpdate()
@@ -68,5 +83,46 @@ public class Player : MonoBehaviour
         var moveDir = new Vector3(moveDirection.x, 0, moveDirection.y);
         moveDir = playerCamera.transform.TransformDirection(moveDir);
         rigidBody.position += moveDir * (movementSpeed * Time.fixedDeltaTime);
+    }
+
+    private void Interact(InputAction.CallbackContext context)
+    {
+        if (nearbyInteractable)
+        {
+            Debug.Log("trying to interact");
+            nearbyInteractable.Interact();
+        }
+    }
+
+    public void Lock()
+    {
+        isLocked = true;
+    }
+
+    public void Free()
+    {
+        isLocked = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collided with trigger");
+        if (other.gameObject.GetComponent<Interactable>() != null)
+        {
+            Debug.Log("collided with Ïnteractable");
+            nearbyInteractable = other.gameObject.GetComponent<Interactable>();
+            //interactCanvas.gameObject.SetActive(true); TODO this if neccessary
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Left trigger");
+        if (other.gameObject.GetComponent<Interactable>() == nearbyInteractable)
+        {
+            Debug.Log("left Ïnteractable");
+            //interactCanvas.gameObject.SetActive(false); TODO this if neccessary
+            nearbyInteractable = null;
+        }
     }
 }

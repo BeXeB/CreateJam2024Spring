@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     
     public void Interact()
     {
+        Debug.Log("Interacting");
         foreach (var onInteractEvent in onInteractEvents)
         {
             onInteractEvent.Invoke();
