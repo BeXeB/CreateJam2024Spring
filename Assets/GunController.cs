@@ -1,15 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class GunController : MonoBehaviour
 {
+    private ObjectPool<Rigidbody> bulletPool;
+    
+    [SerializeField] private GameObject bullet;
     [SerializeField] private VisualEffect GunVFX;
     [SerializeField] private LayerMask raycastHitLayers;
     private Player playerController;
 
     [SerializeField] private float fireRate;
+    private float nextFire;
 
     [SerializeField, Range(0f, 1f)] private float accuracy;
     [SerializeField, Range(0f, 1f)] private float recoil;
@@ -31,6 +37,25 @@ public class GunController : MonoBehaviour
 
         playerController.playerControls.Player.Fire.performed += FireOnPerformed;
         playerController.playerControls.Player.Fire.canceled += FireOnCanceled;
+        
+        //Bullet pooling
+        bulletPool = new ObjectPool<Rigidbody>(() => Instantiate(bullet).GetComponent<Rigidbody>(), GetBullet, ReleaseBullet, DestroyBullet, false, 50    , 1000);
+    }
+
+    private void GetBullet(Rigidbody obj)
+    {
+        obj.gameObject.SetActive(true);
+        obj.position = transform.position;
+    }
+    
+    private void ReleaseBullet(Rigidbody obj)
+    {
+        obj.gameObject.SetActive(false);
+    }
+    
+    private void DestroyBullet(Rigidbody obj)
+    {
+        Destroy(obj.gameObject);
     }
 
     private void OnDisable()
@@ -68,27 +93,16 @@ public class GunController : MonoBehaviour
     }
     #endif
     
+    //Methods for buller pooling
+    
+    
     private void Shoot()
     {
-        if(GunVFX.aliveParticleCount <= 0)
-        {
-            GunVFX.Play();
-        }
-        
-        GunVFX.SetFloat("FireRate", fireRate);
-
         isShooting = true;
     }
     
     private void StopShooting()
     {
-        if(GunVFX.aliveParticleCount <= 0)
-        {
-            GunVFX.Stop();
-        }
-        
-        GunVFX.SetFloat("FireRate", 0f);
-
         isShooting = false;
     }
     
@@ -97,8 +111,10 @@ public class GunController : MonoBehaviour
         Physics.Raycast(mainCamera.ScreenToWorldPoint(playerController.playerControls.Player.MousePosition.ReadValue<Vector2>()), mainCamera.transform.forward, out RaycastHit cameraRay, 100f, raycastHitLayers);
 
         mousePosition = cameraRay.point;
+
+        nextFire += Time.deltaTime;
         
-        if(isShooting)
+        if(isShooting && nextFire >= 1f/fireRate)
         {
             if(recoilBuildUp < recoil)
             {
@@ -112,15 +128,16 @@ public class GunController : MonoBehaviour
 
             shootDirection.y = 0f;
             
-            GunVFX.SetVector3("Direction", shootDirection);
-        }
-        else
-        {
-            if(GunVFX.aliveParticleCount <= 0)
-            {
-                GunVFX.Stop();
-            }
+            Rigidbody bulletInstance = bulletPool.Get();
+
+            StartCoroutine(ReleaseBulletAfterTime(bulletInstance));
             
+            bulletInstance.velocity = shootDirection.normalized * 50f;
+            
+            nextFire = 0f;
+        }
+        else if(!isShooting)
+        {
             if(recoilBuildUp > 0f)
             {
                 recoilBuildUp -= Time.deltaTime;
@@ -141,5 +158,11 @@ public class GunController : MonoBehaviour
         float recoilZ = mousePosition.z + r * Mathf.Sin(theta);
         float recoilX = mousePosition.x + r * Mathf.Cos(theta);
         return new Vector3(recoilX, 0F, recoilZ);
+    }
+    
+    private IEnumerator ReleaseBulletAfterTime(Rigidbody bulletInstance)
+    {
+        yield return new WaitForSeconds(5f);
+        bulletPool.Release(bulletInstance);
     }
 }
