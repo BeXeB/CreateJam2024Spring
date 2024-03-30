@@ -5533,14 +5533,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 2846271571177465219, guid: 1a0a5ed71616e7945b05cc886d391d52, type: 3}
   attachmentsInInventory:
-  - {fileID: 5454563762713590943, guid: 131c7e3403a6bd44083faf235f09ff94, type: 3}
   - {fileID: 3409845011671873896, guid: 0e787fac47ec60f4f887faab295663da, type: 3}
   - {fileID: 435027301928154800, guid: 73393572c4be2a34293d60171f514912, type: 3}
   - {fileID: 7692322203303563233, guid: 6312cfd17d47e8440ae816ae06322a88, type: 3}
   - {fileID: 970446323110266420, guid: 927b1df53f860504b931e7033c46a943, type: 3}
   - {fileID: 5454563762713590943, guid: b67e37e35cef37645841e8a3521086c0, type: 3}
-  - {fileID: 4585845278705787771, guid: 6138041fdb9b9284bb87b9b0adc7f91e, type: 3}
+  - {fileID: 4585845278705787771, guid: d4de634b73e353340914f8285437cb51, type: 3}
   - {fileID: 7692322203303563233, guid: fa3f8a04b185fcb4bae1c792a97225f2, type: 3}
+  - {fileID: 5454563762713590943, guid: 131c7e3403a6bd44083faf235f09ff94, type: 3}
+  - {fileID: 4585845278705787771, guid: 7be766fdd87a07540955bff3999797d1, type: 3}
+  - {fileID: 4585845278705787771, guid: a9a6d5048bb495149ba0ac9364e0b5ce, type: 3}
+  - {fileID: 4585845278705787771, guid: 9800775cac98e6b49950165e441c4f62, type: 3}
+  - {fileID: 4585845278705787771, guid: 6138041fdb9b9284bb87b9b0adc7f91e, type: 3}
   GunVFX: {fileID: 1903749773}
   raycastHitLayers:
     serializedVersion: 2

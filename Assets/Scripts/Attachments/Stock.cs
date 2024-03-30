@@ -9,6 +9,7 @@
         
         gunController.EquipAttachment(this);
         gunController.recoil -= recoilModifier;
+        gunController.playerController.movementSpeed *= movementModifier;
     }
 
     public override void DeAttach()
@@ -20,5 +21,6 @@
         
         gunController.DeEquipAttachment(this);
         gunController.recoil += recoilModifier;
+        gunController.playerController.movementSpeed /= movementModifier;
     }
 }
