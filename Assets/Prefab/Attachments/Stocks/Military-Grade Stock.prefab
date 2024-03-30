@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7894373004531890476}
   - component: {fileID: 4585845278705787771}
   m_Layer: 0
-  m_Name: No Stock
+  m_Name: Military-Grade Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,13 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762e40716c6a4fc8ab32e877eb5574c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentImage: {fileID: 21300000, guid: 6a7ac9e8c26b12440bf2b1da2ca97794, type: 3}
+  attachmentImage: {fileID: 21300000, guid: e6a6624ab013b8e44beddfa2668afb65, type: 3}
   attachmentType: 3
   magazineType: 0
   magazineColor: {r: 0, g: 0, b: 0, a: 0}
   barrelType: 0
+  rangeModifier: 0
+  bulletSpeedModifier: 0
   catalystType: 0
   damageModifier: 0
   fireRateModifier: 0
-  recoilModifier: 0
+  recoilModifier: 0.6
+  movementModifier: 0.75
   accuracyModifier: 0

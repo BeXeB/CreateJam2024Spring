@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     internal PlayerControls playerControls;
     [SerializeField] private Rigidbody rigidBody;
-    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] internal float movementSpeed = 5f;
     private Vector2 moveDirection;
     private bool isLocked = false;
 

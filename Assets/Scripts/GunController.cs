@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class GunController : MonoBehaviour
 {
     private Camera mainCamera;
+    internal Player playerController;
 
     internal ObjectPool<Bullet> bulletPool;
     [SerializeField] private GameObject bullet;
@@ -23,7 +24,6 @@ public class GunController : MonoBehaviour
     
     [SerializeField] private VisualEffect GunVFX;
     [SerializeField] private LayerMask raycastHitLayers;
-    private Player playerController;
     
     [SerializeField] internal Color vfxColor;
     internal MagazineType magazineType;
