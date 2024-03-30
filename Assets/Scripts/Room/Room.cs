@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     public RoomType roomType;
     public Transform playerSpawnPoint;
     
-    private List<IEnemy> enemies;
+    private List<IClearable> enemies;
     
     public Door[] doors;
 
@@ -24,18 +24,16 @@ public class Room : MonoBehaviour
     {
         gameManager = GameManager.instance;
         gameManager.player.transform.position = playerSpawnPoint.position;
-    }
-
-    private void Start()
-    {
+        enemies = new List<IClearable>();
+        
         foreach (var enemyAmount in enemyAmounts)
         {
             for (var i = 0; i < enemyAmount.amount; i++)
             {
                 var enemy = Instantiate(enemyAmount.enemyPrefab, GetRandomPosition(), quaternion.identity);
-                var enemyComponent = enemy.GetComponent<IEnemy>();
+                var enemyComponent = enemy.GetComponent<IClearable>();
                 enemies.Add(enemyComponent);
-                enemy.GetComponent<IEnemy>().OnDeath += OnEnemyDeath;
+                enemy.GetComponent<IClearable>().OnCleared += OnCleared;
             }
         }
     }
@@ -46,12 +44,13 @@ public class Room : MonoBehaviour
             Random.Range(center.y - size.y / 2, center.y + size.y / 2), 0);
     }
     
-    private void OnEnemyDeath(IEnemy enemy)
+    private void OnCleared(IClearable clearable)
     {
-        enemies.Remove(enemy);
-        if (enemies.Count == 0)
+        enemies.Remove(clearable);
+        if (enemies.Count != 0) return;
+        foreach (var door in doors)
         {
-            // Open doors
+            door.OpenDoor();
         }
     }
 }
@@ -65,6 +64,5 @@ public struct EnemyAmount
 
 public enum RoomType
 {
-    Start,
     Normal,
 }

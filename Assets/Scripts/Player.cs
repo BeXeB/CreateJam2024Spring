@@ -11,11 +11,18 @@ public class Player : MonoBehaviour
     private float health;
 
     [Header("Movement")]
-    [SerializeField] private InputAction playerControls;
-    [SerializeField] private Rigidbody2D rigidBody;
+    private PlayerControls playerControls;
+    [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float movementSpeed = 5f;
     private Vector2 moveDirection;
+    [SerializeField] private GameObject playerCamera;
 
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+        health = startingHealth;
+    }
+    
     private void OnEnable()
     {
         playerControls.Enable();
@@ -24,11 +31,6 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-    }
-
-    private void Awake()
-    {
-        health = startingHealth; //TODO if we reload the scripts into new scenes, we need a variable for storing the health
     }
 
     public void Heal(float amount)
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Damagage(float amount)
+    public void Damage(float amount)
     {
         health -= amount;
 
@@ -56,14 +58,15 @@ public class Player : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        moveDirection = playerControls.ReadValue<Vector2>();
+        moveDirection = playerControls.Player.Move.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = moveDirection * movementSpeed;
+        var moveDir = new Vector3(moveDirection.x, 0, moveDirection.y);
+        moveDir = playerCamera.transform.TransformDirection(moveDir);
+        rigidBody.position += moveDir * (movementSpeed * Time.fixedDeltaTime);
     }
 }
