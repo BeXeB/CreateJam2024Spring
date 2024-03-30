@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float health;
 
     [Header("Movement")]
-    private PlayerControls playerControls;
+    internal PlayerControls playerControls;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float movementSpeed = 5f;
     private Vector2 moveDirection;
