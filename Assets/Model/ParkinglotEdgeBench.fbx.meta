@@ -3,7 +3,22 @@ guid: c8354db769bf463438b58986041a3d6f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fasz
+    second: {fileID: 2100000, guid: d6b35a81b8f5cbd42aecac2e42ba4272, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 6f80f2ff4cf03ce4689ad35f657d6b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 0bcf50cdd2c68e74fa83c51eea404d4b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
