@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7894373004531890476}
   - component: {fileID: 970446323110266420}
   m_Layer: 0
-  m_Name: No Receiver
+  m_Name: Burst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +49,14 @@ MonoBehaviour:
   magazineType: 0
   magazineColor: {r: 0, g: 0, b: 0, a: 0}
   barrelType: 0
+  bulletRange: 0
+  bulletSpeed: 0
+  bulletSizeMultiplier: 1
   catalystType: 0
   damageModifier: 0
-  fireRateModifier: 0
+  receiverType: 1
+  fireRate: 2
   recoilModifier: 0
+  movementModifier: 0
   accuracyModifier: 0
+  movementWhileShootingModifier: 0

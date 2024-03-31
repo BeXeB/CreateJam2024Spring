@@ -8,7 +8,16 @@
         }
         
         gunController.EquipAttachment(this);
-        gunController.fireRate += fireRateModifier;
+        gunController.fireRate = fireRate;
+
+        if(name == "Minigun")
+        {
+            gunController.movementWhileShootingModifier += 0.33f;
+        }
+        else if(name == "Mythril Repeater")
+        {
+            gunController.movementWhileShootingModifier += 0.1f;
+        }
     }
 
     public override void DeAttach()
@@ -18,7 +27,15 @@
             gunController = FindAnyObjectByType<GunController>();
         }
         
+        if(name == "Minigun")
+        {
+            gunController.movementWhileShootingModifier -= 0.33f;
+        }
+        else if(name == "Mythril Repeater")
+        {
+            gunController.movementWhileShootingModifier -= 0.1f;
+        }
+        
         gunController.DeEquipAttachment(this);
-        gunController.fireRate -= fireRateModifier;
     }
 }

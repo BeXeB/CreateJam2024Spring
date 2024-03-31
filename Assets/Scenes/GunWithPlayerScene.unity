@@ -5580,6 +5580,11 @@ MonoBehaviour:
   - {fileID: 3409845011671873896, guid: 74bafffe4fee2a24884f037b29d9396e, type: 3}
   - {fileID: 3409845011671873896, guid: ca798f751c3d34a448c43e4b55183b10, type: 3}
   - {fileID: 3409845011671873896, guid: 32533b9a98ad2f3429c946aa6124f7d9, type: 3}
+  - {fileID: 5454563762713590943, guid: cb8997b0ce06d594593db3ae36277627, type: 3}
+  - {fileID: 5454563762713590943, guid: 2090af5d144b674418ce18551ae857d8, type: 3}
+  - {fileID: 5454563762713590943, guid: e830e3137079d08479281433e3e6364c, type: 3}
+  - {fileID: 5454563762713590943, guid: 131c7e3403a6bd44083faf235f09ff94, type: 3}
+  - {fileID: 5454563762713590943, guid: 1274f433ba4447d4db397b3819186c0d, type: 3}
   GunVFX: {fileID: 1903749773}
   raycastHitLayers:
     serializedVersion: 2
@@ -5593,6 +5598,7 @@ MonoBehaviour:
   maximumAccuracyAngle: 30
   bulletRange: 1
   bulletSizeMultiplier: 1
+  movementWhileShootingModifier: 0
 --- !u!1001 &1557287576
 PrefabInstance:
   m_ObjectHideFlags: 0

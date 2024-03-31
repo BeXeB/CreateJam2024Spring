@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7894373004531890476}
-  - component: {fileID: 5454563762713590943}
+  - component: {fileID: 970446323110266420}
   m_Layer: 0
-  m_Name: Reflex Sight
+  m_Name: Mythril Repeater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5454563762713590943
+--- !u!114 &970446323110266420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,16 +41,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8492568418710994761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab826fc8b2b845cf89649619c49e9078, type: 3}
+  m_Script: {fileID: 11500000, guid: 266f98aeb6674d9296a60705ba2c55eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentImage: {fileID: 21300000, guid: ffdf80dc342e69344b2dccafe04c30ee, type: 3}
-  attachmentType: 0
+  attachmentImage: {fileID: 21300000, guid: 4f3a106299767d146975053c7be09b97, type: 3}
+  attachmentType: 4
   magazineType: 0
   magazineColor: {r: 0, g: 0, b: 0, a: 0}
   barrelType: 0
+  bulletRange: 0
+  bulletSpeed: 0
+  bulletSizeMultiplier: 1
   catalystType: 0
   damageModifier: 0
-  fireRateModifier: 0
+  receiverType: 2
+  fireRate: 15
   recoilModifier: 0
-  accuracyModifier: 0.1
+  movementModifier: 0
+  accuracyModifier: 0
+  movementWhileShootingModifier: 0

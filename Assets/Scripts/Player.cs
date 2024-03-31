@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private bool isLocked = false;
 
     [SerializeField] private GameObject playerCamera;
+    internal float movementSpeedShootingReduction;
 
     private Interactable nearbyInteractable;
 
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
     {
         var moveDir = new Vector3(moveDirection.x, 0, moveDirection.y);
         moveDir = playerCamera.transform.TransformDirection(moveDir);
-        rigidBody.position += moveDir * (movementSpeed * Time.fixedDeltaTime);
+        rigidBody.position += moveDir * (movementSpeed * movementSpeedShootingReduction * Time.fixedDeltaTime);
     }
 
     private void Interact(InputAction.CallbackContext context)
