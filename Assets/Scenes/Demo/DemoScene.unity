@@ -785,7 +785,7 @@ MonoBehaviour:
       x: 4
       y: 4
   enemyAmounts:
-  - enemyPrefab: {fileID: 739952368075162474, guid: 8871e9479701c354fb24c4a4bc18e450, type: 3}
+  - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
     amount: 6
   chests: []
 --- !u!4 &67923376
@@ -803,6 +803,8 @@ Transform:
   m_Children:
   - {fileID: 414045058}
   - {fileID: 586376066}
+  - {fileID: 1615512161}
+  - {fileID: 1929613332}
   - {fileID: 501748029}
   - {fileID: 1850055029}
   - {fileID: 1871530410}
@@ -3379,7 +3381,7 @@ Transform:
   m_GameObject: {fileID: 290866567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.88, y: 0, z: 0}
+  m_LocalPosition: {x: 6.75, y: 0, z: -2.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4128,7 +4130,7 @@ Transform:
   m_GameObject: {fileID: 414045057}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.88, y: 0, z: 0}
+  m_LocalPosition: {x: 6.71, y: 0, z: 4.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5246,7 +5248,7 @@ MonoBehaviour:
       x: 4
       y: 4
   enemyAmounts:
-  - enemyPrefab: {fileID: 739952368075162474, guid: 8871e9479701c354fb24c4a4bc18e450, type: 3}
+  - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
     amount: 6
   chests: []
 --- !u!4 &525522678
@@ -5264,6 +5266,7 @@ Transform:
   m_Children:
   - {fileID: 290866568}
   - {fileID: 1152350660}
+  - {fileID: 1921685259}
   - {fileID: 1933435725}
   - {fileID: 1820893493}
   - {fileID: 1305032069}
@@ -5897,7 +5900,7 @@ Transform:
   m_GameObject: {fileID: 586376065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.34, y: 0, z: 15.44}
+  m_LocalPosition: {x: 23.87, y: 0, z: 15.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15436,6 +15439,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7254478388353475631, guid: 31444e4c347130448b3bb5ac2c697025, type: 3}
   m_PrefabInstance: {fileID: 1615113196}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1615512160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615512161}
+  m_Layer: 0
+  m_Name: SpawnCenter (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1615512161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615512160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.58, y: 0, z: 15.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 67923376}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1616048656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18647,6 +18681,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 868322859685791174, guid: 04e45b0652c8fba41973ad0859083a63, type: 3}
   m_PrefabInstance: {fileID: 1921248079}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1921685258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921685259}
+  m_Layer: 0
+  m_Name: SpawnCenter (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1921685259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921685258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.51, y: 0, z: 15.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 525522678}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1929613331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929613332}
+  m_Layer: 0
+  m_Name: SpawnCenter (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1929613332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929613331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.77, y: 0, z: 15.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 67923376}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1933435724
 GameObject:
   m_ObjectHideFlags: 0

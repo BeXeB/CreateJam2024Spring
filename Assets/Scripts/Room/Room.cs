@@ -27,9 +27,11 @@ public class Room : MonoBehaviour
         gameManager.player.transform.position = playerSpawnPoint.position;
         clearables = new List<IClearable>();
         
+        var wave = gameManager.GetWave();
+        
         foreach (var enemyAmount in enemyAmounts)
         {
-            for (var i = 0; i < enemyAmount.amount; i++)
+            for (var i = 0; i < (enemyAmount.amount + wave); i++)
             {
                 var enemy = Instantiate(enemyAmount.enemyPrefab, GetRandomPosition(), quaternion.identity);
                 var enemyComponent = enemy.GetComponent<IClearable>();
