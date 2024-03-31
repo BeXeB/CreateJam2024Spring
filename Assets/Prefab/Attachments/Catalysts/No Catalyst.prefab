@@ -53,7 +53,7 @@ MonoBehaviour:
   bulletSpeed: 0
   bulletSizeMultiplier: 1
   catalystType: 0
-  damageModifier: 0
+  damageModifier: 1
   receiverType: 0
   fireRate: 0
   recoilModifier: 0

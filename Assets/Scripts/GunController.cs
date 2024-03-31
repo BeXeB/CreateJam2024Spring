@@ -29,7 +29,7 @@ public class GunController : MonoBehaviour
     internal MagazineType magazineType;
     [SerializeField] internal float bulletSpeed = 5f;
     [SerializeField] internal float fireRate = 5f;
-    [SerializeField] internal float damage;
+    [SerializeField] internal float damage = 10;
     [SerializeField, Range(0f, 1f)] internal float accuracy = 1f;
     [SerializeField, Range(0f, 1f)] internal float recoil = 1f;
     [SerializeField, Range(0f, 90f)] internal float maximumAccuracyAngle = 45f;
