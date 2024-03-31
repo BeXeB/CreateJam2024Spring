@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        throw new NotImplementedException();
         SceneManager.LoadScene(3);
     }
 

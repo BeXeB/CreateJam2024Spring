@@ -28,10 +28,6 @@ public class AudioManager : MonoBehaviour
         
         foreach(Sound s in sounds)
         {
-            if(s.isMusic && !s.playOnAwake && s.loopSource == null)
-            {
-                continue;
-            }
             
             s.source = gameObject.AddComponent<AudioSource>();
 
@@ -78,20 +74,24 @@ public class AudioManager : MonoBehaviour
         
         if(s.isMusic)
         {
-            s.source.volume = s.volume * musicVolume;
+            s.source.volume = s.volume;
+                              //* musicVolume;
 
             if(s.loopSource)
             {
-                s.loopSource.volume = s.volume * musicVolume;
+                s.loopSource.volume = s.volume;
+                //* musicVolume;
             }
         }
         else
         {
-            s.source.volume = s.volume * soundVolume;
+            s.source.volume = s.volume;
+            //* soundVolume;
             
             if(s.loopSource)
             {
-                s.loopSource.volume = s.volume * soundVolume;
+                s.loopSource.volume = s.volume;
+                //* soundVolume;
             }
         }
 
@@ -296,7 +296,7 @@ public class AudioManager : MonoBehaviour
         
         float fadeRate = 1f / fadeInDuration / 50f;
 
-        s.source.volume = 0f;
+        s.source.volume = 1f;
 
         s.source.Play();
 
