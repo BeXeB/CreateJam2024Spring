@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
     internal Rigidbody rb;
     private Coroutine returnToPoolCoroutine;
     internal float timeToLiveModifier = 1f;
+
+    internal bool isSplit;
     
     internal CatalystTypes catalystType;
 
@@ -36,8 +38,16 @@ public class Bullet : MonoBehaviour
         switch(catalystType)
         {
             case CatalystTypes.Splitter:
+                if(!isSplit)
+                {
+                    StartCoroutine(SplitBullet());
+                }
                 break;
             case CatalystTypes.MagicSplitter:
+                if(!isSplit)
+                {
+                    StartCoroutine(MagicSplitBullet());
+                }
                 break;
             case CatalystTypes.Holy:
                 break;
@@ -48,12 +58,9 @@ public class Bullet : MonoBehaviour
                 enemies.AddRange(FindObjectsByType<Dummy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).Select(enemy => enemy.transform.gameObject).ToList());    
                 if (enemies.Count > 0)
                 {
-                    // Get the closest enemy to the bullet
-                    Debug.Log(1);
-
                     homingTarget = enemies.OrderBy(enemy => (enemy.transform.position - transform.position).sqrMagnitude).FirstOrDefault();
                 }
-                //get closest enemy to bullet
+
                 if(homingTarget != null)
                 {
                     if(Vector3.Distance(homingTarget.transform.position, transform.position) < 5f)
@@ -67,6 +74,42 @@ public class Bullet : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private IEnumerator SplitBullet()
+    {
+        yield return new WaitForSeconds(1f);
+        for(int i = -1; i < 2; i++)
+        {
+            Bullet bullet = gunController.bulletPool.Get();
+            bullet.rb.position = rb.position;
+            bullet.rb.velocity = Quaternion.Euler(0, 30 * i, 0) * rb.velocity;
+            bullet.bulletVFX.SetVector3("Direction", bullet.rb.velocity.normalized);
+            bullet.bulletVFX.SetVector4("Main Color", gunController.vfxColor);
+            bullet.timeToLiveModifier = 0.5f;
+            bullet.Instantiate();
+            bullet.isSplit = true;
+        }
+        
+        gunController.bulletPool.Release(this);
+    }
+    
+    private IEnumerator MagicSplitBullet()
+    {
+        yield return new WaitForSeconds(1f);
+        for(int i = -3; i < 4; i++)
+        {
+            Bullet bullet = gunController.bulletPool.Get();
+            bullet.rb.position = rb.position;
+            bullet.rb.velocity = Quaternion.Euler(0, 15 * i, 0) * rb.velocity;
+            bullet.bulletVFX.SetVector3("Direction", bullet.rb.velocity.normalized);
+            bullet.bulletVFX.SetVector4("Main Color", gunController.vfxColor);
+            bullet.timeToLiveModifier = 0.25f;
+            bullet.Instantiate();
+            bullet.isSplit = true;
+        }
+        
+        gunController.bulletPool.Release(this);
     }
 
     private void Awake()

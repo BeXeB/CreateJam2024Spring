@@ -308,6 +308,8 @@ public class GunController : MonoBehaviour
 
             bulletInstance.timeToLiveModifier = bulletRange;
             
+            bulletInstance.isSplit = false;
+            
             bulletInstance.Instantiate();
             
             bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
@@ -327,6 +329,8 @@ public class GunController : MonoBehaviour
                 bulletInstance.timeToLiveModifier = bulletRange;
             
                 bulletInstance.Instantiate();
+
+                bulletInstance.isSplit = false;
             
                 bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
             
