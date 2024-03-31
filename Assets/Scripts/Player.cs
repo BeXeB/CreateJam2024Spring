@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private bool isLocked = false;
 
     [SerializeField] private GameObject playerCamera;
-    internal float movementSpeedShootingReduction;
+    internal float movementSpeedShootingReduction = 1;
 
     private Interactable nearbyInteractable;
 

@@ -1,16 +1,40 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour, IClearable
 {
     [SerializeField] private Conversation conversation;
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.instance;
+    }
+
     public void Open()
     {
-        var itemobtained = Random.Range(0, 2) == 0 ? "Health Potion" : "Mana Potion";
+        var attachment = gameManager.GetRandomAttachment();
+        
+        if (attachment == null)
+        {
+            conversation.SetDialogue(new List<DialogueLine>
+            {
+                new () {message = "You found all attachments!"}
+            });
+            
+            conversation.SetUpConversation();
+            
+            OnCleared?.Invoke(this);
+            return;
+        }
+        
         conversation.SetDialogue(new List<DialogueLine>
         {
-            new () {message = "You found a " + itemobtained + "!"}
+            new () {message = "You found a " + attachment.name + "!"}
         });
+        
+        gameManager.player.GetComponent<GunController>().AddAttachment(attachment);
         
         conversation.SetUpConversation();
         
