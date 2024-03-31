@@ -106,7 +106,7 @@ public class GunController : MonoBehaviour
             nextFire += Time.deltaTime;
         }
         
-        if(equippedReceiver.receiverType is ReceiverType.SemiAuto or ReceiverType.Burst && isShooting && waitForClick)
+        if(equippedReceiver.receiverType is ReceiverType.SemiAuto or ReceiverType.Burst && isShooting && waitForClick && equippedCatalyst.catalystType != CatalystTypes.Laser)
         {
             return;
         }

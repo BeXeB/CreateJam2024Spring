@@ -15,6 +15,13 @@
         {
             gunController.EquipShotgun();
         }
+        
+        switch(gunController.equippedCatalyst.catalystType)
+        {
+            case CatalystTypes.Laser:
+                gunController.bulletSpeed *= 5f;
+                break;
+        }
     }
 
     public override void DeAttach()

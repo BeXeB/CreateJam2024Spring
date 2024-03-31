@@ -9,6 +9,13 @@
         
         gunController.EquipAttachment(this);
         gunController.fireRate = fireRate;
+        
+        switch(gunController.equippedCatalyst.catalystType)
+        {
+            case CatalystTypes.Laser:
+                gunController.fireRate *= 25f;
+                break;
+        }
 
         if(name == "Minigun")
         {
