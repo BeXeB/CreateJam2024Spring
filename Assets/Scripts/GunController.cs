@@ -35,14 +35,17 @@ public class GunController : MonoBehaviour
     [SerializeField, Range(0f, 90f)] internal float maximumAccuracyAngle = 45f;
     [SerializeField] internal float bulletRange;
     [SerializeField] internal float bulletSizeMultiplier = 1f;
+    [SerializeField] internal float movementWhileShootingModifier = 1f;
     
     private float nextFire;
     private float recoilBuildUp;
+    private float movementSpeedBuildUp;
 
     private Vector3 mousePosition;
     private Vector3 shootingPosition;
     
     private bool isShooting;
+    private bool waitForClick;
     private bool isShotgun;
 
 
@@ -59,11 +62,11 @@ public class GunController : MonoBehaviour
         //Bullet pooling
         bulletPool = new ObjectPool<Bullet>(() => Instantiate(bullet).GetComponent<Bullet>(), GetBullet, ReleaseBullet, DestroyBullet, true, 50    , 1000);
         
-        equippedScope = attachmentsInInventory.Find(defaultScope => defaultScope.name == "No Scope") as Scope;
+        equippedScope = attachmentsInInventory.Find(defaultScope => defaultScope.name == "Iron Sights") as Scope;
         equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "Pistol Barrel") as Barrel;
         equippedMagazine = attachmentsInInventory.Find(defaultMagazine => defaultMagazine.name == "No Magazine") as Magazine;
         equippedStock = attachmentsInInventory.Find(defaultStock => defaultStock.name == "No Stock") as Stock;
-        equippedReceiver = attachmentsInInventory.Find(defaultReceiver => defaultReceiver.name == "No Receiver") as Receiver;
+        equippedReceiver = attachmentsInInventory.Find(defaultReceiver => defaultReceiver.name == "Semi-Automatic") as Receiver;
         equippedCatalyst = attachmentsInInventory.Find(defaultCatalyst => defaultCatalyst.name == "No Catalyst") as Catalyst;
     }
 
@@ -98,7 +101,15 @@ public class GunController : MonoBehaviour
 
         mousePosition = cameraRay.point;
 
-        nextFire += Time.deltaTime;
+        if(nextFire < 1f / fireRate)
+        {
+            nextFire += Time.deltaTime;
+        }
+        
+        if(equippedReceiver.receiverType is ReceiverType.SemiAuto or ReceiverType.Burst && isShooting && waitForClick)
+        {
+            return;
+        }
         
         if(isShooting && nextFire >= 1f/fireRate)
         {
@@ -106,59 +117,22 @@ public class GunController : MonoBehaviour
             {
                 recoilBuildUp += Time.deltaTime;
             }
-            Vector3 position = playerController.transform.position;
-            
-            shootingPosition = CalculateRecoil(position);
 
-            Vector3 shootDirection = shootingPosition - position;
-
-            shootDirection.y = 0f;
-
-            if(!isShotgun)
+            if(equippedReceiver.receiverType == ReceiverType.Burst)
             {
-                Bullet bulletInstance = bulletPool.Get();
-            
-                bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
-            
-                bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
-
-                bulletInstance.timeToLiveModifier = bulletRange;
-            
-                bulletInstance.Instantiate();
-            
-                bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
-            
-                bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+                StartCoroutine(ShootBurstBullets());
             }
             else
             {
-                for (int i = 0; i < 9; i++)
-                {
-                    Bullet bulletInstance = bulletPool.Get();
-            
-                    bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
-            
-                    bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
-
-                    bulletInstance.timeToLiveModifier = bulletRange;
-            
-                    bulletInstance.Instantiate();
-            
-                    bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
-            
-                    shootDirection = shootingPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) - position;
-                    
-                    shootDirection.y = 0f;
-                    
-                    bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
-                }
+                ShootBullet();
+                
+                nextFire = 0f;
             }
-            
-            
-            nextFire = 0f;
         }
         else if(!isShooting)
         {
+            playerController.movementSpeedShootingReduction = 1f;
+
             if(recoilBuildUp > 0f)
             {
                 recoilBuildUp -= Time.deltaTime;
@@ -264,16 +238,16 @@ public class GunController : MonoBehaviour
         switch (attachment.attachmentType)
         {
             case AttachmentType.Scope:
-                if(equippedScope == attachment  && equippedScope.name != "No Scope")
+                if(equippedScope == attachment  && equippedScope.name != "Iron Sights")
                 {
-                    equippedScope = attachmentsInInventory.Find(defaultScope => defaultScope.name == "No Scope") as Scope;
+                    equippedScope = attachmentsInInventory.Find(defaultScope => defaultScope.name == "Iron Sights") as Scope;
                     attachment.DeAttach();
                 }
                 break;
             case AttachmentType.Barrel:
                 if(equippedBarrel == attachment && equippedBarrel.name != "Pistol Barrel")
                 {
-                    equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "No Barrel") as Barrel;
+                    equippedBarrel = attachmentsInInventory.Find(defaultBarrel => defaultBarrel.name == "Pistol Barrel") as Barrel;
                     attachment.DeAttach();
                 }
                 break;
@@ -292,9 +266,9 @@ public class GunController : MonoBehaviour
                 }
                 break;
             case AttachmentType.Receiver:
-                if(equippedReceiver == attachment && equippedReceiver.name != "No Receiver")
+                if(equippedReceiver == attachment && equippedReceiver.name != "Semi-Automatic")
                 {
-                    equippedReceiver = attachmentsInInventory.Find(defaultReceiver => defaultReceiver.name == "No Receiver") as Receiver;
+                    equippedReceiver = attachmentsInInventory.Find(defaultReceiver => defaultReceiver.name == "Semi-Automatic") as Receiver;
                     attachment.DeAttach();
                 }
                 break;
@@ -308,14 +282,87 @@ public class GunController : MonoBehaviour
         }
     }
     
+    private void ShootBullet()
+    {
+        waitForClick = true;
+        
+        movementSpeedBuildUp = 1 - movementWhileShootingModifier * (recoilBuildUp / recoil);
+            
+        playerController.movementSpeedShootingReduction = movementSpeedBuildUp;
+            
+        Vector3 position = playerController.transform.position;
+            
+        shootingPosition = CalculateRecoil(position);
+
+        Vector3 shootDirection = shootingPosition - position;
+
+        shootDirection.y = 0f;
+
+        if(!isShotgun)
+        {
+            Bullet bulletInstance = bulletPool.Get();
+            
+            bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+            
+            bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
+
+            bulletInstance.timeToLiveModifier = bulletRange;
+            
+            bulletInstance.Instantiate();
+            
+            bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
+            
+            bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+        }
+        else
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                Bullet bulletInstance = bulletPool.Get();
+            
+                bulletInstance.bulletVFX.SetVector3("Direction", shootDirection.normalized);
+            
+                bulletInstance.bulletVFX.SetVector4("Main Color", vfxColor);
+
+                bulletInstance.timeToLiveModifier = bulletRange;
+            
+                bulletInstance.Instantiate();
+            
+                bulletInstance.transform.localScale = bullet.transform.localScale * bulletSizeMultiplier;
+            
+                shootDirection = shootingPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) - position;
+                    
+                shootDirection.y = 0f;
+                    
+                bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
+            }
+        }
+    }
+    
     private void Shoot()
     {
         isShooting = true;
+        waitForClick = false;
     }
     
     private void StopShooting()
     {
         isShooting = false;
+    }
+    
+    private IEnumerator ShootBurstBullets()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            nextFire = 0f;
+            
+            ShootBullet();
+
+            yield return new WaitForSeconds(1f/fireRate/3f);
+            
+            nextFire = 0f;
+        }
+        
     }
 
     private Vector3 CalculateRecoil(Vector3 position)

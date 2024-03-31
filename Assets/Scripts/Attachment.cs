@@ -20,12 +20,14 @@ public abstract class Attachment : MonoBehaviour
     public CatalystTypes catalystType;
     [SerializeField] protected float damageModifier;
     [Header("Receiver")]
-    [SerializeField] protected float fireRateModifier;
+    public ReceiverType receiverType;
+    [SerializeField] protected float fireRate;
     [Header("Stock")]
     [SerializeField, Range(0f, 1f)] protected float recoilModifier;
     [SerializeField, Range(0f, 2f)] protected float movementModifier; 
     [Header("Scope")]
     [SerializeField, Range(0f, 1f)] protected float accuracyModifier;
+    [SerializeField, Range(0f, 1f)] protected float movementWhileShootingModifier;
 
     private void Awake()
     {
@@ -79,4 +81,11 @@ public enum CatalystTypes
 {
     Laser,
     Bullet
+}
+
+public enum ReceiverType
+{
+    SemiAuto,
+    Burst,
+    FullAuto
 }

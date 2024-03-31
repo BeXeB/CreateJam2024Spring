@@ -9,6 +9,7 @@
         
         gunController.EquipAttachment(this);
         gunController.accuracy -= accuracyModifier;
+        gunController.movementWhileShootingModifier = movementWhileShootingModifier;
     }
 
     public override void DeAttach()
@@ -19,6 +20,6 @@
         }
         
         gunController.DeEquipAttachment(this);
-        gunController.accuracy += accuracyModifier;
+        gunController.accuracy += accuracyModifier; 
     }
 }

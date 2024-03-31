@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] internal float movementSpeed = 5f;
     private Vector2 moveDirection;
     [SerializeField] private GameObject playerCamera;
+    internal float movementSpeedShootingReduction;
 
     private void Awake()
     {
@@ -67,6 +68,6 @@ public class Player : MonoBehaviour
     {
         var moveDir = new Vector3(moveDirection.x, 0, moveDirection.y);
         moveDir = playerCamera.transform.TransformDirection(moveDir);
-        rigidBody.position += moveDir * (movementSpeed * Time.fixedDeltaTime);
+        rigidBody.position += moveDir * (movementSpeed * movementSpeedShootingReduction * Time.fixedDeltaTime);
     }
 }
