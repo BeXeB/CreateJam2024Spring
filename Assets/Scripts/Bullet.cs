@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
-    private GunController gunController;
+    internal GunController gunController;
     private GameObject homingTarget;
     [SerializeField] internal VisualEffect bulletVFX;
     internal Rigidbody rb;

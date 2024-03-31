@@ -66,6 +66,17 @@ public class Enemy : MonoBehaviour, IClearable
             Attack(other);
         }
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag($"Bullet"))
+        {
+            var bullet = other.GetComponent<Bullet>();
+            if (bullet == null) return;
+            Damage(bullet.gunController.damage);
+            bullet.ReturnToPool();
+        }
+    }
 
     public void OnCollisionStay(Collision other)
     {

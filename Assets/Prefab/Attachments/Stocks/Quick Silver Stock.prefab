@@ -49,11 +49,14 @@ MonoBehaviour:
   magazineType: 0
   magazineColor: {r: 0, g: 0, b: 0, a: 0}
   barrelType: 0
-  rangeModifier: 0
-  bulletSpeedModifier: 0
+  bulletRange: 0
+  bulletSpeed: 0
+  bulletSizeMultiplier: 1
   catalystType: 0
   damageModifier: 0
-  fireRateModifier: 0
+  receiverType: 0
+  fireRate: 0
   recoilModifier: 0.15
-  movementModifier: 1.2
+  movementModifier: 1.96
   accuracyModifier: 0
+  movementWhileShootingModifier: 0

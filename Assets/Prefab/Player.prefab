@@ -154,7 +154,7 @@ MonoBehaviour:
   vfxColor: {r: 1, g: 0.7019608, b: 0.7019608, a: 1}
   bulletSpeed: 5
   fireRate: 2
-  damage: 0
+  damage: 10
   accuracy: 1
   recoil: 1
   maximumAccuracyAngle: 30
