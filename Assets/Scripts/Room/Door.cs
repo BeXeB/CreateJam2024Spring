@@ -36,9 +36,8 @@ public class Door : MonoBehaviour
         col.enabled = true;
     }
     
-    private void OnCollisionEnter(Collision other)
+    public void PlayerEnter()
     {
-        if (!other.gameObject.CompareTag("Player")) return;
         col.enabled = false;
 
         thisRoom.gameObject.SetActive(false);

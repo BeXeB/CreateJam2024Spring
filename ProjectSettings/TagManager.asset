@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,6 @@ TagManager:
   - Bullet
   - Ground
   - Obstacle
-  - 
   - 
   - 
   - 

@@ -111,6 +111,12 @@ public class Player : MonoBehaviour
             nearbyInteractable = other.gameObject.GetComponent<Interactable>();
             //interactCanvas.gameObject.SetActive(true); TODO this if neccessary
         }
+        if (other.gameObject.CompareTag("Door"))
+        {
+            var door = other.gameObject.GetComponent<Door>();
+            
+            door.PlayerEnter();
+        }
     }
 
     private void OnTriggerExit(Collider other)
