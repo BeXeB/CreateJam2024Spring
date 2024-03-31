@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 
     public void Heal(float amount)
     {
+        AudioMananger.instance.PlayAudioClip("Sacrifice");
         health += amount;
         onHealthChanged?.Invoke(health, maxHealth);
 

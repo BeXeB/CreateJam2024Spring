@@ -20,7 +20,12 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
-    
+
+    private void Start()
+    {
+        AudioMananger.instance.PlayMusicClip("Non Combat Music");
+    }
+
     public GameObject player;
     [SerializeField] private List<RoomsPerType> roomsPerType;
 

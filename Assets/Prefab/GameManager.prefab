@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 505020657966723913}
   - component: {fileID: 6171264889910008451}
+  - component: {fileID: -6061697376212218672}
+  - component: {fileID: -4845853670229717323}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,4 +52,148 @@ MonoBehaviour:
     rooms:
     - {fileID: 0}
     - {fileID: 0}
+  unlockableAttachments: []
   currentRoom: {fileID: 0}
+--- !u!114 &-6061697376212218672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006759807976208710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b527e3aa216248040b3ed9f724841a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: -4845853670229717323}
+  musicSource: {fileID: -4845853670229717323}
+  audioClipData:
+  - name: Dying
+    clip: {fileID: 8300000, guid: 89e5f10aba67f5e43ab536e5dd5118e5, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+  - name: Shooting
+    clip: {fileID: 8300000, guid: f26fe0261fd60e3488f0eb1ef6da5c21, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+  - name: Sacrifice
+    clip: {fileID: 8300000, guid: daeb42366463aea4fa11c2516783287b, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+  - name: Menu Button Sound
+    clip: {fileID: 8300000, guid: 1c5d855aca5a77747b623a30a7b99aed, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+  musicClipData:
+  - name: Combat Music
+    clip: {fileID: 8300000, guid: 64ab3aa67328e4f41b9e2e3424c9b773, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 1
+  - name: Non Combat Music
+    clip: {fileID: 8300000, guid: 366be067a94167745b58d9f5c9ec7388, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 1
+--- !u!82 &-4845853670229717323
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006759807976208710}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

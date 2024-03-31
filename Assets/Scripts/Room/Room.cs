@@ -26,7 +26,14 @@ public class Room : MonoBehaviour
         gameManager = GameManager.instance;
         gameManager.player.transform.position = playerSpawnPoint.position;
         clearables = new List<IClearable>();
-        
+
+        if (roomType == RoomType.Normal)
+        {
+            AudioMananger.instance.PlayMusicClip("Combat Music");
+        }
+        else AudioMananger.instance.PlayMusicClip("Non Combat Music");
+
+
         foreach (var enemyAmount in enemyAmounts)
         {
             for (var i = 0; i < enemyAmount.amount; i++)

@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour, IClearable
 
     private void Die()
     {
+        AudioMananger.instance.PlayAudioClip("Dying");
         OnCleared?.Invoke(this);
         Destroy(gameObject);
     }
