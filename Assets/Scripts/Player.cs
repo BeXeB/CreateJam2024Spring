@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
         health = startingHealth;
         onHealthChanged?.Invoke(health, maxHealth);
     }
+    
 
     private void OnEnable()
     {
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        throw new NotImplementedException();
         SceneManager.LoadScene(3);
     }
 
@@ -141,3 +143,4 @@ public class Player : MonoBehaviour
         }
     }
 }
+

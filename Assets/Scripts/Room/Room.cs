@@ -32,11 +32,12 @@ public class Room : MonoBehaviour
             AudioMananger.instance.PlayMusicClip("Combat Music");
         }
         else AudioMananger.instance.PlayMusicClip("Non Combat Music");
-
-
+        
+        var wave = gameManager.GetWave();
+        
         foreach (var enemyAmount in enemyAmounts)
         {
-            for (var i = 0; i < enemyAmount.amount; i++)
+            for (var i = 0; i < (enemyAmount.amount + wave); i++)
             {
                 var enemy = Instantiate(enemyAmount.enemyPrefab, GetRandomPosition(), quaternion.identity);
                 var enemyComponent = enemy.GetComponent<IClearable>();

@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     
     public Room currentRoom;
     
+    private int currentWave = 1;
+    
     public (Room, RoomType) GetRandomRoom()
     {
         while (true)
@@ -54,6 +56,16 @@ public class GameManager : MonoBehaviour
         var attachment = unlockableAttachments[UnityEngine.Random.Range(0, unlockableAttachments.Count)];
         unlockableAttachments.Remove(attachment);
         return attachment;
+    }
+
+    public void IncreaseWave()
+    {
+        currentWave++;
+    }
+
+    public int GetWave()
+    {
+        return currentWave;
     }
 }
 
