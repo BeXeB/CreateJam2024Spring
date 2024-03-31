@@ -284,6 +284,8 @@ public class GunController : MonoBehaviour
     
     private void ShootBullet()
     {
+        playerController.Damage(10/fireRate);
+        
         waitForClick = true;
         
         movementSpeedBuildUp = 1 - movementWhileShootingModifier * (recoilBuildUp / recoil);

@@ -786,7 +786,7 @@ MonoBehaviour:
       y: 4
   enemyAmounts:
   - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
-    amount: 3
+    amount: 1
   chests: []
 --- !u!4 &67923376
 Transform:
@@ -5249,7 +5249,7 @@ MonoBehaviour:
       y: 4
   enemyAmounts:
   - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
-    amount: 2
+    amount: 1
   chests: []
 --- !u!4 &525522678
 Transform:
@@ -17663,6 +17663,10 @@ PrefabInstance:
     - target: {fileID: 4793089652369902245, guid: bc51727c728cc614ea6192135f00d364, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185454206500211377, guid: bc51727c728cc614ea6192135f00d364, type: 3}
+      propertyPath: damage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9185454206500211377, guid: bc51727c728cc614ea6192135f00d364, type: 3}
       propertyPath: attachmentsInInventory.Array.size
