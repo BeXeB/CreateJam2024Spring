@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        AudioMananger.instance.PlayMusicClip("Non Combat Music");
+        AudioManager.instance.PlayAudioClip("Non Combat Music");
     }
 
     public GameObject player;

@@ -29,9 +29,9 @@ public class Room : MonoBehaviour
 
         if (roomType == RoomType.Normal)
         {
-            AudioMananger.instance.PlayMusicClip("Combat Music");
+            AudioManager.instance.PlayAudioClip("Combat Music");
         }
-        else AudioMananger.instance.PlayMusicClip("Non Combat Music");
+        else AudioManager.instance.PlayAudioClip("Non Combat Music");
         
         var wave = gameManager.GetWave();
         

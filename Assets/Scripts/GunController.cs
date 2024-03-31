@@ -343,7 +343,7 @@ public class GunController : MonoBehaviour
                 bulletInstance.rb.velocity = shootDirection.normalized * bulletSpeed;
             }
         }
-        AudioMananger.instance.PlayAudioClip("Shooting");
+        AudioManager.instance.PlayAudioClip("Shooting");
     }
     
     private void Shoot()

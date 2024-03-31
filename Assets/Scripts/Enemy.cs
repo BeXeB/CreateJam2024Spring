@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IClearable
         player = GameManager.instance.player.GetComponent<Player>();
         var seeker = GetComponent<AIDestinationSetter>();
         seeker.target = player.transform;
+        AstarPath.active.Scan();
     }
 
     private void Update()
@@ -55,7 +56,7 @@ public class Enemy : MonoBehaviour, IClearable
 
     private void Die()
     {
-        AudioMananger.instance.PlayAudioClip("Dying");
+        AudioManager.instance.PlayAudioClip("Dying");
         OnCleared?.Invoke(this);
         Destroy(gameObject);
     }
