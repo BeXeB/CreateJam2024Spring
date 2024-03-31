@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7894373004531890476}
   - component: {fileID: 435027301928154800}
   m_Layer: 0
-  m_Name: No Catalyst
+  m_Name: Holy Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ MonoBehaviour:
   bulletRange: 0
   bulletSpeed: 0
   bulletSizeMultiplier: 1
-  catalystType: 0
-  damageModifier: 0
+  catalystType: 4
+  damageModifier: 1.25
   receiverType: 0
   fireRate: 0
   recoilModifier: 0
