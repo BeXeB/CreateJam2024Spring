@@ -17572,7 +17572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a383bc5b7b5ae249956b530f592a367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 10
+  healAmount: 50
   cooldown: 5
 --- !u!1001 &1829691189
 PrefabInstance:
