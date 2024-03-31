@@ -23,11 +23,6 @@ public class AudioMananger : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        PlayMusicClip("Menu");
-    }
-
     public void PlayAudioClip(string clipName)
     {
         foreach (var clip in audioClipData)

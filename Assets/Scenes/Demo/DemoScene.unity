@@ -786,7 +786,7 @@ MonoBehaviour:
       y: 4
   enemyAmounts:
   - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
-    amount: 6
+    amount: 3
   chests: []
 --- !u!4 &67923376
 Transform:
@@ -2243,7 +2243,7 @@ MonoBehaviour:
       y: 4
   enemyAmounts:
   - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
-    amount: 5
+    amount: 1
   chests: []
 --- !u!4 &188275679
 Transform:
@@ -5249,7 +5249,7 @@ MonoBehaviour:
       y: 4
   enemyAmounts:
   - enemyPrefab: {fileID: 8965203893135010172, guid: 57e77ce817cbd7241a70683cc5ac905c, type: 3}
-    amount: 6
+    amount: 2
   chests: []
 --- !u!4 &525522678
 Transform:
@@ -15079,7 +15079,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1596881663}
   - component: {fileID: 1596881667}
-  - component: {fileID: 1596881666}
   - component: {fileID: 1596881665}
   - component: {fileID: 1596881664}
   m_Layer: 0
@@ -15182,14 +15181,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1596881666
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596881662}
-  m_Enabled: 1
 --- !u!20 &1596881667
 Camera:
   m_ObjectHideFlags: 0
@@ -21211,138 +21202,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1829138396}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: roomsPerType.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: unlockableAttachments.Array.size
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: roomsPerType.Array.data[1].roomType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[0]'
-      value: 
-      objectReference: {fileID: 4585845278705787771, guid: 7be766fdd87a07540955bff3999797d1, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[1]'
-      value: 
-      objectReference: {fileID: 4585845278705787771, guid: a9a6d5048bb495149ba0ac9364e0b5ce, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[2]'
-      value: 
-      objectReference: {fileID: 4585845278705787771, guid: 9800775cac98e6b49950165e441c4f62, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[3]'
-      value: 
-      objectReference: {fileID: 4585845278705787771, guid: 6138041fdb9b9284bb87b9b0adc7f91e, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[4]'
-      value: 
-      objectReference: {fileID: 3409845011671873896, guid: 74bafffe4fee2a24884f037b29d9396e, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[5]'
-      value: 
-      objectReference: {fileID: 3409845011671873896, guid: ca798f751c3d34a448c43e4b55183b10, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[6]'
-      value: 
-      objectReference: {fileID: 3409845011671873896, guid: 32533b9a98ad2f3429c946aa6124f7d9, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[7]'
-      value: 
-      objectReference: {fileID: 5454563762713590943, guid: cb8997b0ce06d594593db3ae36277627, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[8]'
-      value: 
-      objectReference: {fileID: 5454563762713590943, guid: 2090af5d144b674418ce18551ae857d8, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[9]'
-      value: 
-      objectReference: {fileID: 5454563762713590943, guid: e830e3137079d08479281433e3e6364c, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[10]'
-      value: 
-      objectReference: {fileID: 5454563762713590943, guid: 131c7e3403a6bd44083faf235f09ff94, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[11]'
-      value: 
-      objectReference: {fileID: 5454563762713590943, guid: 1274f433ba4447d4db397b3819186c0d, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[12]'
-      value: 
-      objectReference: {fileID: 970446323110266420, guid: 338a6b5eca157874483aaffc93c08ccd, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[13]'
-      value: 
-      objectReference: {fileID: 970446323110266420, guid: 7f88784e39122e440bfbc41e1a889ded, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[14]'
-      value: 
-      objectReference: {fileID: 970446323110266420, guid: e6acd4dd72ffdd14986dee4da8618698, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[15]'
-      value: 
-      objectReference: {fileID: 970446323110266420, guid: 52cc6c3ecb28f1d4e90db7c55daec5ac, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[16]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 37fe23f5b17890045b207fc0a66bd685, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[17]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 9188e21ce45af6142856607b70f0b570, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[18]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: f8f869a9240de2a438b67184b7bd0854, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[19]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: e179b7150a7da3340a38a390e8abeefb, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[20]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 1162ca72d70f47948a6b52415827ef56, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[21]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 638bff11a1854354f8b8bf3d88600fd5, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[22]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 37fe23f5b17890045b207fc0a66bd685, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[23]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 9188e21ce45af6142856607b70f0b570, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[24]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: f8f869a9240de2a438b67184b7bd0854, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[25]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: e179b7150a7da3340a38a390e8abeefb, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[26]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 1162ca72d70f47948a6b52415827ef56, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: 'unlockableAttachments.Array.data[27]'
-      value: 
-      objectReference: {fileID: 435027301928154800, guid: 638bff11a1854354f8b8bf3d88600fd5, type: 3}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: roomsPerType.Array.data[0].rooms.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
-      propertyPath: roomsPerType.Array.data[1].rooms.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6171264889910008451, guid: 26d95a259d22ef74cbbf55cbecb45117, type: 3}
       propertyPath: 'roomsPerType.Array.data[0].rooms.Array.data[0]'
       value: 
