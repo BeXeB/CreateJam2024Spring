@@ -75,7 +75,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""GunMenu"",
                     ""type"": ""Button"",
-                    ""id"": ""43563eed-015e-4bf8-8a14-e2a9cdc4bf2f"",
+                    ""id"": ""2ca8b88a-542b-4aa2-8cb2-c0d7f38eb7bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6b56597-5f98-4a1c-8149-1147e677120e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -305,12 +314,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ae1ae134-d8f6-4591-87d9-4e54f587644d"",
+                    ""id"": ""3a4a1f5c-c20e-45d2-a2ef-de3c01329803"",
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GunMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5034947-a231-4dfb-87c6-212dd4b7161b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -904,6 +924,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_GunMenu = m_Player.FindAction("GunMenu", throwIfNotFound: true);
+        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -983,6 +1004,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_GunMenu;
+    private readonly InputAction m_Player_Heal;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -993,6 +1015,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @GunMenu => m_Wrapper.m_Player_GunMenu;
+        public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1020,6 +1043,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GunMenu.started += instance.OnGunMenu;
             @GunMenu.performed += instance.OnGunMenu;
             @GunMenu.canceled += instance.OnGunMenu;
+            @Heal.started += instance.OnHeal;
+            @Heal.performed += instance.OnHeal;
+            @Heal.canceled += instance.OnHeal;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1042,6 +1068,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GunMenu.started -= instance.OnGunMenu;
             @GunMenu.performed -= instance.OnGunMenu;
             @GunMenu.canceled -= instance.OnGunMenu;
+            @Heal.started -= instance.OnHeal;
+            @Heal.performed -= instance.OnHeal;
+            @Heal.canceled -= instance.OnHeal;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1230,6 +1259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnGunMenu(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

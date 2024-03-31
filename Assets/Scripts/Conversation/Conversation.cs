@@ -49,7 +49,7 @@ public class Conversation : MonoBehaviour
             throw new Exception("Missing Conversation Canvas");
         }
 
-        player = FindFirstObjectByType<Player>().GetComponent<Player>();
+        player = GameManager.instance.player.GetComponent<Player>();
         playerVoicePool = player.voicePool;
         playerName = player.name;
     }
@@ -77,18 +77,18 @@ public class Conversation : MonoBehaviour
         if (dialouge[currentLine].playerMessage)
         {
             speakerText.text = playerName;
-            playVoice(playerVoicePool);
+            if (playerVoicePool.Count != 0) PlayVoice(playerVoicePool);
         }
         else
         {
             speakerText.text = entityName;
-            playVoice(entityVoicePool);
+            if (entityVoicePool.Count != 0) PlayVoice(entityVoicePool);
         }
         dialogueLineText.text = dialouge[currentLine].message;
         currentLine++;
     }
 
-    private void playVoice(List<AudioClip> voicePool)
+    private void PlayVoice(List<AudioClip> voicePool)
     {
         if (voicePool != null)
         {
@@ -100,6 +100,11 @@ public class Conversation : MonoBehaviour
                 audioSource.Play();
             }
         }
+    }
+    
+    public void SetDialogue(List<DialogueLine> dialogue)
+    {
+        dialouge = dialogue;
     }
 
     public void SetUpConversation()

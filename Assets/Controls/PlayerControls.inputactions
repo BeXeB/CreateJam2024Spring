@@ -53,7 +53,16 @@
                 {
                     "name": "GunMenu",
                     "type": "Button",
-                    "id": "43563eed-015e-4bf8-8a14-e2a9cdc4bf2f",
+                    "id": "2ca8b88a-542b-4aa2-8cb2-c0d7f38eb7bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Heal",
+                    "type": "Button",
+                    "id": "b6b56597-5f98-4a1c-8149-1147e677120e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -283,12 +292,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ae1ae134-d8f6-4591-87d9-4e54f587644d",
+                    "id": "3a4a1f5c-c20e-45d2-a2ef-de3c01329803",
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "GunMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5034947-a231-4dfb-87c6-212dd4b7161b",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
