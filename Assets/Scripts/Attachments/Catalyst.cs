@@ -20,6 +20,9 @@ public class Catalyst : Attachment
                 gunController.accuracy *= 0.01f;
                 gunController.recoil *= 0.01f;
                 break;
+            case CatalystTypes.Homing:
+                gunController.bulletRange += 2f;
+                break;
         }
     }
 
@@ -37,6 +40,9 @@ public class Catalyst : Attachment
                 gunController.bulletSpeed /= 5f;
                 accuracyModifier /= 0.01f;
                 recoilModifier /= 0.01f;
+                break;
+            case CatalystTypes.Homing:
+                gunController.bulletRange -= 2f;
                 break;
         }
         
