@@ -23,14 +23,32 @@ public class GameManager : MonoBehaviour
     
     public GameObject player;
     [SerializeField] private List<RoomsPerType> roomsPerType;
+
+    [SerializeField] private List<Attachment> unlockableAttachments;
     
     public Room currentRoom;
     
-    public Room GetRandomRoomOfType(RoomType roomType)
+    public (Room, RoomType) GetRandomRoom()
     {
-        var rooms = roomsPerType.First(r => r.roomType == roomType).rooms;
-        var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
-        return availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
+        while (true)
+        {
+            var roomType = Enum.GetValues(typeof(RoomType));
+            var randomRoomType = (RoomType) roomType.GetValue(UnityEngine.Random.Range(0, roomType.Length));
+            var rooms = roomsPerType.First(r => r.roomType == randomRoomType).rooms;
+            var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
+        
+            if (availableRooms.Length == 0) continue;
+            
+            return (availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)], randomRoomType);
+        }
+    }
+    
+    public Attachment GetRandomAttachment()
+    {
+        if (unlockableAttachments.Count == 0) return null;
+        var attachment = unlockableAttachments[UnityEngine.Random.Range(0, unlockableAttachments.Count)];
+        unlockableAttachments.Remove(attachment);
+        return attachment;
     }
 }
 

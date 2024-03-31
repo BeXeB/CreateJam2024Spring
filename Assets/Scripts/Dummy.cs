@@ -9,7 +9,7 @@ public class Dummy : MonoBehaviour, IClearable
         if(other.CompareTag($"Bullet"))
         {
             OnCleared?.Invoke(this);
-            other.gameObject.SetActive(false);
+            other.GetComponent<Bullet>().ReturnToPool();
             Destroy(gameObject);
         }
     }

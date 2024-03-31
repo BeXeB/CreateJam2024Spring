@@ -15,11 +15,12 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     internal PlayerControls playerControls;
     [SerializeField] private Rigidbody rigidBody;
-    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] internal float movementSpeed = 5f;
     private Vector2 moveDirection;
     private bool isLocked = false;
 
     [SerializeField] private GameObject playerCamera;
+    internal float movementSpeedShootingReduction = 1;
 
     private Interactable nearbyInteractable;
 
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
     {
         var moveDir = new Vector3(moveDirection.x, 0, moveDirection.y);
         moveDir = playerCamera.transform.TransformDirection(moveDir);
-        rigidBody.position += moveDir * (movementSpeed * Time.fixedDeltaTime);
+        rigidBody.position += moveDir * (movementSpeed * movementSpeedShootingReduction * Time.fixedDeltaTime);
     }
 
     private void Interact(InputAction.CallbackContext context)

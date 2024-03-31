@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8810511483326462593}
   - component: {fileID: 5617725895569827978}
   - component: {fileID: 507880352324236842}
+  - component: {fileID: 4674747764427516789}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: Bullet
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2846271571177465219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.842, y: -0.57, z: 12.469}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -145,7 +146,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2846271571177465219}
   m_Enabled: 1
-  m_Asset: {fileID: 0}
+  m_Asset: {fileID: 8926484042661614526, guid: f166952b30dd88c42a8ff1e1ccd930bf, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -160,7 +161,10 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 2, y: 0, z: 0, w: 1}
+        m_Name: Main Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -217,3 +221,16 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4674747764427516789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846271571177465219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d7eca3942525947ae8a51cc52c01fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletVFX: {fileID: 5617725895569827978}
