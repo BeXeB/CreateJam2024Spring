@@ -11,6 +11,8 @@ public class Door : MonoBehaviour
     [SerializeField] private Collider col;
     [SerializeField] private Image nextRoomIcon;
     [SerializeField] private List<RoomTypeIcon> roomTypeIcons;
+    [SerializeField] private GameObject doorClosed;
+    [SerializeField] private GameObject doorOpen;
     
     private Room nextRoom = null;
     private RoomType nextRoomType;
@@ -26,6 +28,8 @@ public class Door : MonoBehaviour
     public void OpenDoor()
     {
         // Play animation
+        doorOpen.SetActive(true);
+        doorClosed.SetActive(false);
         
         (nextRoom, nextRoomType) = gameManager.GetRandomRoom();
         
