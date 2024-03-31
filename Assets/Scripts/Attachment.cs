@@ -79,8 +79,13 @@ public enum BarrelTypes
 
 public enum CatalystTypes
 {
+    Normal,
     Laser,
-    Bullet
+    Splitter,
+    MagicSplitter,
+    Holy,
+    Infernal,
+    Homing
 }
 
 public enum ReceiverType
