@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 236029579740516539}
   - component: {fileID: 4016495920395242344}
   - component: {fileID: 5595547115239979793}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7843808649450808029}
   - component: {fileID: 8558613028502048181}
   - component: {fileID: 1114127365857712086}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 868322859685791174}
   - component: {fileID: 1866379460010747328}
   - component: {fileID: 1250093308456770725}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Door
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 3997833569553321503}
   - component: {fileID: 4955660356704092598}
   - component: {fileID: 8828141514628307414}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,9 +422,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 52efac42a94481546a5634c3e19bf531, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 52efac42a94481546a5634c3e19bf531, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 52efac42a94481546a5634c3e19bf531, type: 3}
       propertyPath: m_Name
       value: maingate
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 52efac42a94481546a5634c3e19bf531, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 52efac42a94481546a5634c3e19bf531, type: 3}
       propertyPath: m_TagString
