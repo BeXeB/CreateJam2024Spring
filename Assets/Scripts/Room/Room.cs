@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     public RoomType roomType;
     public Transform playerSpawnPoint;
     
-    private List<IClearable> enemies;
+    private List<IClearable> clearables;
     
     public Door[] doors;
 
@@ -19,11 +19,13 @@ public class Room : MonoBehaviour
     
     public List<EnemyAmount> enemyAmounts;
     
+    public List<Chest> chests;
+    
     private void OnEnable()
     {
         gameManager = GameManager.instance;
         gameManager.player.transform.position = playerSpawnPoint.position;
-        enemies = new List<IClearable>();
+        clearables = new List<IClearable>();
         
         foreach (var enemyAmount in enemyAmounts)
         {
@@ -31,9 +33,15 @@ public class Room : MonoBehaviour
             {
                 var enemy = Instantiate(enemyAmount.enemyPrefab, GetRandomPosition(), quaternion.identity);
                 var enemyComponent = enemy.GetComponent<IClearable>();
-                enemies.Add(enemyComponent);
+                clearables.Add(enemyComponent);
                 enemy.GetComponent<IClearable>().OnCleared += OnCleared;
             }
+        }
+        
+        foreach (var chest in chests)
+        {
+            clearables.Add(chest);
+            chest.OnCleared += OnCleared;
         }
     }
     
@@ -48,8 +56,8 @@ public class Room : MonoBehaviour
     
     private void OnCleared(IClearable clearable)
     {
-        enemies.Remove(clearable);
-        if (enemies.Count != 0) return;
+        clearables.Remove(clearable);
+        if (clearables.Count != 0) return;
         foreach (var door in doors)
         {
             door.OpenDoor();
@@ -74,4 +82,5 @@ public struct SpawnArea
 public enum RoomType
 {
     Normal,
+    Chest
 }

@@ -26,11 +26,17 @@ public class GameManager : MonoBehaviour
     
     public Room currentRoom;
     
-    public Room GetRandomRoomOfType(RoomType roomType)
+    public (Room, RoomType) GetRandomRoom()
     {
-        var rooms = roomsPerType.First(r => r.roomType == roomType).rooms;
-        var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
-        return availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
+        while (true)
+        {
+            var roomType = Enum.GetValues(typeof(RoomType));
+            var randomRoomType = (RoomType) roomType.GetValue(UnityEngine.Random.Range(0, roomType.Length));
+            var rooms = roomsPerType.First(r => r.roomType == randomRoomType).rooms;
+            var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
+        
+            return (availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)], randomRoomType);
+        }
     }
 }
 

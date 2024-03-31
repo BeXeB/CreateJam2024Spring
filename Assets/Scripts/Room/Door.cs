@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     [SerializeField] private Room thisRoom;
     [SerializeField] private Collider col;
     private Room nextRoom = null;
+    private RoomType nextRoomType;
     
     private void OnEnable()
     {
@@ -19,9 +20,7 @@ public class Door : MonoBehaviour
     {
         // Play animation
         
-        var roomType = Enum.GetValues(typeof(RoomType));
-        var randomRoomType = (RoomType) roomType.GetValue(UnityEngine.Random.Range(0, roomType.Length));
-        nextRoom = gameManager.GetRandomRoomOfType(randomRoomType);
+        (nextRoom, nextRoomType) = gameManager.GetRandomRoom();
         
         // Display next room icon
         
