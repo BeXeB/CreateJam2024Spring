@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public delegate void OnHealthChanged(float currentHealth, float maxHealth);
+    public event OnHealthChanged onHealthChanged;
+    
+    
     public string playerName = "Player"; // TODO choose a character name or let player type one
     public List<AudioClip> voicePool; // Pool used for playing sound when player speaks in dialogue
     [SerializeField] private float maxHealth = 100f;
@@ -27,9 +32,14 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        health = startingHealth;
     }
-    
+
+    private void Start()
+    {
+        health = startingHealth;
+        onHealthChanged?.Invoke(health, maxHealth);
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -45,6 +55,7 @@ public class Player : MonoBehaviour
     public void Heal(float amount)
     {
         health += amount;
+        onHealthChanged?.Invoke(health, maxHealth);
 
         if(health > maxHealth)
         {
@@ -55,6 +66,7 @@ public class Player : MonoBehaviour
     public void Damage(float amount)
     {
         health -= amount;
+        onHealthChanged?.Invoke(health, maxHealth);
 
         if(health <= 0)
         {
@@ -64,7 +76,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(3);
     }
 
     private void Update()
@@ -110,6 +122,12 @@ public class Player : MonoBehaviour
         {
             nearbyInteractable = other.gameObject.GetComponent<Interactable>();
             //interactCanvas.gameObject.SetActive(true); TODO this if neccessary
+        }
+        if (other.gameObject.CompareTag("Door"))
+        {
+            var door = other.gameObject.GetComponent<Door>();
+            
+            door.PlayerEnter();
         }
     }
 

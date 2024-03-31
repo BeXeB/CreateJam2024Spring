@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour, IClearable
 {
@@ -11,31 +12,35 @@ public class Enemy : MonoBehaviour, IClearable
     //[SerializeField] private float startingHealth = 100f;
     [SerializeField] private float damage = 10f;
     private float health;
+    private Player player;
+    [SerializeField] private float attackSpeed = 1f;
+    private float attackCooldown = 0f;
 
     private void Awake()
     {
         health = maxHealth;
+        player = GameManager.instance.player.GetComponent<Player>();
+        var seeker = GetComponent<AIDestinationSetter>();
+        seeker.target = player.transform;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void Attack(Collision collision)
     {
+        if (attackCooldown > 0) return;
         Player player = collision.collider.GetComponent<Player>();
         if (player != null)
         {
             player.Damage(damage);
         }
+        attackCooldown = attackSpeed;
     }
 
     public void Damage(float amount)
@@ -52,5 +57,21 @@ public class Enemy : MonoBehaviour, IClearable
     {
         OnCleared?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            Attack(other);
+        }
+    }
+
+    public void OnCollisionStay(Collision other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            Attack(other);
+        }
     }
 }
