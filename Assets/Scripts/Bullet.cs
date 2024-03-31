@@ -120,7 +120,18 @@ public class Bullet : MonoBehaviour
 
     public void ReturnToPool()
     {
-        gunController.bulletPool.Release(this);
+        if(catalystType == CatalystTypes.Holy)
+        {
+            //Instantiate a holy explosion
+        }
+        else if(catalystType == CatalystTypes.Infernal)
+        {
+            //Instantiate an infernal explosion
+        }
+        else
+        {
+            gunController.bulletPool.Release(this);
+        }
     }
     
     
