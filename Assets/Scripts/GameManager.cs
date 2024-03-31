@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             var roomType = Enum.GetValues(typeof(RoomType));
             var randomRoomType = (RoomType) roomType.GetValue(UnityEngine.Random.Range(0, roomType.Length));
-            var rooms = roomsPerType.First(r => r.roomType == randomRoomType).rooms;
+            var rooms = roomsPerType.Find(r => r.roomType == randomRoomType).rooms;
             var availableRooms = rooms.Where(r => r != currentRoom).ToArray();
         
             if (availableRooms.Length == 0) continue;

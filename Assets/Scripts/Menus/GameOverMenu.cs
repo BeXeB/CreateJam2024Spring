@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    [SerializeField] private string firstSceneName = "SampleScene";
+    [SerializeField] private string firstSceneName = "DemoScene";
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     public void RestartGame()

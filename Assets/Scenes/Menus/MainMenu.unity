@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMainMenu: {fileID: 228422241}
-  firstSceneName: SampleScene
+  firstSceneName: DemoScene
   controlsMenu: {fileID: 1334935559}
 --- !u!114 &488757601
 MonoBehaviour:
